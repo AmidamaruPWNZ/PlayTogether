@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../img/fav/fav.ico" type="image">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/fav/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Новый пост</title>
+  </head>
+  <body>
+    <main>
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8 p-5">
+            <div class="card">
+              <div class="card-header">       
+                Новый пост             
+              </div>
+              <div class="card-body">        
+                <form method="post" action="{% url 'posts:create_post' %}">
+                  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                  <div class="form-group row my-3 p-3">
+                    <label for="{{ form.text.id_for_label }}">
+                      Текст поста                  
+                      <span class="required text-danger" >*</span>                  
+                    </label>
+                    {{ form.text }}
+                  </div>
+                  <small id="id_text-help" class="form-text text-muted">
+                      Текст нового поста
+                    </small>
+                  <div class="form-group row my-3 p-3">
+                    <label for="{{ form.group.if_for_label }}">
+                      <label for="{{ form.text.id_for_label }}">
+                      Группа
+                    </label>
+                      <select name="group" class="form-control" id="id_group">
+                        <option value="{{ form.group }}">
+                          {{ form.group.title }}
+                        </option>
+                      </select>
+                    </label>
+                  </div>
+                  <small id="id_group-help" class="form-text text-muted">
+                      Группа, к которой будет относиться пост
+                    </small>
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                      Опубликовать
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'includes/footer.html' %}
+  </body>
+</html>
+
+{% endblock %}
